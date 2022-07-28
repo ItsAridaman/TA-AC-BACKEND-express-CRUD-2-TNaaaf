@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>Add your details</h1> 
+    <a href="/">Back</a>
+    <form class="myform" action="/add" method="post">
+       
+
+        <label for="">Title</label>
+        <input type="text" name="Title" placeholder="Type book name here..">
+        <label for="">Summary</label>
+        <input type="text" name="Summary" placeholder="Type book name here..">
+        
+        <label for="book">Choose a category:</label>
+            <select id="book" name="Category">
+               <option value="friction">friction</option>
+               <option value="adventure">adventure</option>
+               <option value="technology">technology</option>
+               <option value="motivation">motivation</option>
+            </select>
+        
+
+        <label for="">Author</label>
+        <input type="text" name="Author" placeholder="Type book name here..">
+        <input type="submit">
+    </form>
+
+</body>
+
+</html>
