@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+       <h1>Bookstore</h1>
+          <div>
+             <a href="/add">Add Book</a>
+          </div>
+         <div>
+              <label for="book">search by category:</label>
+              <select id="book" name="category">
+              <a href="">
+              <option value="friction">friction</option>
+              </a>
+              <a href="">
+              <option value="adventure">adventure</option>
+              </a>
+              <a href="">
+              <option value="technology">technology</option>
+              </a>
+              <a href="">
+              <option value="motivation">motivation</option>
+              </a>
+              </select>
+          </div>
+
+  <ul>
+    <% find.forEach((find)=> { %>
+      <li>
+        <%= find.Category %>
+      </li>
+      <% }); %>
+  </ul>
+
+
+</body>
+
+</html>
