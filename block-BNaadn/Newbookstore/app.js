@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var fs = require('fs');
 var path = require('path');
 var mongoose=require('mongoose');
 var bookmodel=require(__dirname + '/models/bookdetail.js')

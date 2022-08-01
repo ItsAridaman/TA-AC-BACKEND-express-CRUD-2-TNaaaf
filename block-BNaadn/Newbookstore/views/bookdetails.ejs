@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <h1>About book</h1>
+    <a href="/home">Back</a>
+
+    <div>
+        <li>
+            Title: <%= content.Title %>
+        </li>
+        <li>
+            Written by: <%= content.Author %>
+        </li>
+        <li>
+            Category: <%= content.Category %>
+        </li>
+        <a href="/<%= content._id %>/edit">Edit</a>
+        <a href="/<%= content._id %>/delete">Delete</a>
+    </div>
+
+    <form action="/<%= content._id %>/comment" method="post">
+        <label>Add comment</label>
+        <textarea name="content" placeholder="enter your comment here"></textarea>
+        <input type="submit">
+    </form>
+
+    <ul>
+        <% content.comments.forEach(function(result) { %>
+            <li>
+                <%= result.content %>
+            </li>
+            <a href="/<%= result._id %>/comment/edit">Edit</a>
+            <a href="/<%= result._id %>/comment/delete">Delete</a>
+            <% }); %>
+
+    </ul>
+
+    <a href="/<%= content._id %>/Likes">
+        <button>Like</button>
+    </a>
+   
+    <h><%= content.Likes %></h>
+   
+
+
+
+</body>
+
+</html>

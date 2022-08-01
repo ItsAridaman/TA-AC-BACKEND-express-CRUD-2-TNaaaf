@@ -7,33 +7,33 @@
 </head>
 
 <body>
-       <h1>Bookstore</h1>
-          <div>
-             <a href="/add">Add Book</a>
-          </div>
-         <div>
-              <label for="book">search by category:</label>
-              <select id="book" name="category">
-              <a href="">
-              <option value="friction">friction</option>
-              </a>
-              <a href="">
-              <option value="adventure">adventure</option>
-              </a>
-              <a href="">
-              <option value="technology">technology</option>
-              </a>
-              <a href="">
-              <option value="motivation">motivation</option>
-              </a>
-              </select>
-          </div>
+  <h1>Bookstore</h1>
+  <div>
+    <a href="/add">Add Book</a>
+  </div>
+  <div>
+    <form action="/home/Category" method="get">
+      <label for="Category">search by category:</label>
+      <input type="text" name="Category" placeholder="type category">
+
+      <label for="Author">search by author:</label>
+      <input type="text" name="Author" placeholder="type author name">
+
+      <label for="Name">search by title:</label>
+      <input type="text" name="Title" placeholder="type book name">
+
+      <input type="submit">
+    </form>
+  </div>
 
   <ul>
-    <% find.forEach((find)=> { %>
-      <li>
-        <%= find.Category %>
+    <% content.forEach((content)=> { %>
+      <hr>
+      <li> Title:
+        <%= content.Title %>
       </li>
+      <a href="/bookdetails/<%= content._id %>">Details</a>
+
       <% }); %>
   </ul>
 
