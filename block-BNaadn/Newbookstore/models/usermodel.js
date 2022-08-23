@@ -45,7 +45,7 @@ UserSchema.methods.verifypassword= async function(password)
 
 UserSchema.methods.signToken= async function()
 {
-    var payload = {userId: this.id, email:this.email, username:this.username, IsAdmin:this.IsAdmin};
+    var payload = {userId: this.id, email:this.email, role:this.role, username:this.username, IsAdmin:this.IsAdmin};
     try{
         var token = await jwt.sign(payload, "thisisthesecret");
         return token;
