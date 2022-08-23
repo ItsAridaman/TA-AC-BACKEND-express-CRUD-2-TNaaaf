@@ -10,7 +10,7 @@ var UserSchema = new Schema(
          username: { type: String, required: true },
          phone: { type: Number},
          email: { type: String, unique: true },
-         password: { type: String, required: true },
+         password: { type: String, minlength:5, required: true },
          role: {type:String},
          IsAdmin: {type:Boolean, default:false}
     }
