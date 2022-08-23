@@ -1,12 +1,17 @@
 var createError = require('http-errors');
 var express = require('express');
-var fs = require('fs');
 var path = require('path');
+var cookieParser=require('cookie-parser');
 var mongoose=require('mongoose');
-var bookmodel=require(__dirname + '/models/bookdetail.js')
+var dotenv = require('dotenv').config();
+var session=require('express-session');
+var MongoStore = require('connect-mongo');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const auth = require('./middlewares/auth');
+
 
 var app = express();
 
@@ -15,7 +20,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Newbookstore',(err)=>
   console.log(err?err:"connected to database");
 })
 
-app.listen(5000, ()=>
+app.listen(4000, ()=>
 {
   console.log("server has started");
 })
@@ -28,8 +33,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialised: false,
+  store: MongoStore.create({
+   
+    mongoUrl: "mongodb://127.0.0.1:27017/Newbookstore"
+  })}));
+
+app.use('/api', indexRouter);
+app.use('/api/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
