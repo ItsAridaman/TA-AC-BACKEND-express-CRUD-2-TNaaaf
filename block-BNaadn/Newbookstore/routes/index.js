@@ -43,7 +43,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post('/addProduct', auth.verifyToken, async (req, res, next) => {
+router.post('/addProduct', auth.verifyTokenA, async (req, res, next) => {
   try {
     var Product = await product.create(req.body);
     res.status(201).json({ Product });
@@ -76,7 +76,7 @@ router.post('/editProduct/:id', auth.verifyToken, async (req, res, next) => {
 })
 
 
-router.get('/delete/:id', auth.verifyToken, async (req, res, next) => {
+router.get('/delete/:id', auth.verifyTokenA, async (req, res, next) => {
   try {
     var id = req.params.id;
     var result = await product.findOneAndUpdate(id);
