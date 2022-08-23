@@ -4,7 +4,6 @@ module.exports = {
     verifyToken: async (req, res, next) => {
         var token = req.headers.authorization;
         var userInfo = req.user;
-        console.log("this is userinfo", userInfo);
         try {
             if (token) {
                 var payload = await jwt.verify(token, "thisisthesecret");
@@ -30,8 +29,6 @@ module.exports = {
 
     verifyTokenA: async (req, res, next) => {
         var token = req.headers.authorization;
-        var userInfo = req.user;
-        console.log("this is userinfo", userInfo);
         try {
             if (token) {
                 var payload = await jwt.verify(token, "thisisthesecret");
