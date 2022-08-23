@@ -1,3 +1,4 @@
+const { compareSync } = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -31,8 +32,12 @@ module.exports = {
         var token = req.headers.authorization;
         try {
             if (token) {
+
                 var payload = await jwt.verify(token, "thisisthesecret");
                 req.user = payload;
+                
+                console.log("this is the payload",payload);
+                
                 if(payload.role=="Admin")
                 {
                     next();
