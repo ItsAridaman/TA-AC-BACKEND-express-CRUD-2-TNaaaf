@@ -1,10 +1,9 @@
-const { compareSync } = require('bcrypt');
+var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
 module.exports = {
     verifyToken: async (req, res, next) => {
         var token = req.headers.authorization;
-        var userInfo = req.user;
         try {
             if (token) {
                 var payload = await jwt.verify(token, "thisisthesecret");
@@ -58,6 +57,8 @@ module.exports = {
 
 }
 }
+
+
 
 
 
