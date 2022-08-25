@@ -1,39 +1,35 @@
 var mongoose = require('mongoose');
 var bcrypt = require("bcrypt");
-var jwt= require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 var Schema = mongoose.Schema;
 
 
 var UserSchema = new Schema(
-    {   
-         username: { type: String, required: true },
-         phone: { type: Number},
-         email: { type: String, unique: true },
-         password: { type: String, minlength:5, required: true },
-         role: {type:String},
-         IsAdmin: {type:Boolean, default:false}
+    {
+        username: { type: String, required: true },
+        phone: { type: Number },
+        email: { type: String, unique: true },
+        password: { type: String, minlength: 5, required: true },
+        role: { type: String },
+        IsAdmin: { type: Boolean, default: false }
     }
 );
 
-UserSchema.pre('save', async function(next)
-{
-    if((this.role && this.role==="Manager") || (this.role && this.role==="Admin") )
-    {
-        this.IsAdmin=true;
+UserSchema.pre('save', async function (next) {
+    if ((this.role && this.role === "Manager") || (this.role && this.role === "Admin")) {
+        this.IsAdmin = true;
     }
-    if(this.password && this.isModified('password'))
-    {
-        this.password= await bcrypt.hash(this.password, 10);
+    if (this.password && this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10);
 
     }
     next()
 })
 
-UserSchema.methods.verifypassword= async function(password)
-{
-    try{
-        var result= await bcrypt.compare(password, this.password);
+UserSchema.methods.verifypassword = async function (password) {
+    try {
+        var result = await bcrypt.compare(password, this.password);
         return result;
     }
     catch (error) {
@@ -43,22 +39,19 @@ UserSchema.methods.verifypassword= async function(password)
 }
 
 
-UserSchema.methods.signToken= async function()
-{
-    var payload = {userId: this.id, email:this.email, role:this.role, username:this.username, IsAdmin:this.IsAdmin};
-    try{
+UserSchema.methods.signToken = async function () {
+    var payload = { userId: this.id, email: this.email, role: this.role, username: this.username, IsAdmin: this.IsAdmin };
+    try {
         var token = await jwt.sign(payload, "thisisthesecret");
         return token;
     }
-    catch (error)
-    {
+    catch (error) {
         return error;
     }
 }
 
-UserSchema.methods.userJSON = function(token)
-{
-    return{
+UserSchema.methods.userJSON = function (token) {
+    return {
         name: this.name,
         email: this.email,
         role: this.role,

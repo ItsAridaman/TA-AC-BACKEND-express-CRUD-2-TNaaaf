@@ -32,10 +32,15 @@ router.post("/login", async (req, res, next) => {
     if (!result) {
       return res.status(400).json({ error: "Invalid password" })
     }
-    req.user = User;
 
     var token = await User.signToken();
+   
+    req.session.userId = User.id;
+    req.session.token = token; 
 
+    console.log("here are the details");
+    console.log(req.session.userId, req.session.token);
+    
     res.status(201).json({ User, token });
   }
   catch (error) {
